@@ -13,6 +13,7 @@ public class Date {
         setDay(day);
     }
 
+    //region GetterSetter
     public int getYear() {
         return year;
     }
@@ -40,74 +41,63 @@ public class Date {
         this.day = day;
     }
 
+    //endregion
 
+    //region Weekday logic
     private int getMonthIndex() {
 
-        switch (this.month) {
-            case 1:
-            case 10:
-                return 1;
-            case 11:
-            case 2:
-            case 3:
-                return 4;
-            case 4:
-            case 7:
-                return 0;
-            case 5:
-                return 2;
-            case 6:
-                return 5;
-            case 8:
-                return 3;
-            case 9:
-            case 12:
-                return 6;
-            default:
-                throw new RuntimeException("Invalid day");
-        }
+        return switch (this.month) {
+            case 1, 10 -> 1;
+            case 11, 2, 3 -> 4;
+            case 4, 7 -> 0;
+            case 5 -> 2;
+            case 6 -> 5;
+            case 8 -> 3;
+            case 9, 12 -> 6;
+            default -> throw new RuntimeException("Invalid day");
+        };
     }
 
-    private int getDaysForMonth(int year, int month) {
-        switch (this.month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                return 31;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                return 30;
-            case 2:
-                return isLeapYear(year) ? 29 : 28;
-            default: //return -1; //TODO: sout -1 as error message.
-                throw new RuntimeException("Invalid month");
-        }
+    public String getWeekdayName() {
+        return weekdays[getWeekdayNumber()];
     }
+
+    private int getWeekdayNumber() {
+        return (getCurrentMonthDays() + getMonthIndex() + getYearIndex() - (isLeapYear(this.year) ? 1 : 0)) % 7;
+    }
+
+    //endregion
+
+    //region Helpers
+    private int getDaysForMonth(int year, int month) {
+
+        return switch (month) {
+            case 1, 3, 5, 7, 8, 10, 12 -> 31;
+            case 4, 6, 9, 11 -> 30;
+            case 2 -> isLeapYear(year) ? 29 : 28;
+            default -> throw new RuntimeException("Invalid month");
+        };
+    }
+
 
     private int getCurrentMonthDays() {
 
         return getDaysForMonth(this.year, this.month);
     }
 
-    public boolean isLeapYear(int year) {
+    private boolean isLeapYear(int year) {
         return (year % 4 == 0 && (year % 400 == 0 ^ year % 100 != 0));
 
     }
 
-    public String getWeekdayName(int dayOfTheWeek) {
-        return weekdays[dayOfTheWeek];
+    private int getYearIndex() {
+        return -2 * ((this.year / 100) % 4 + 3);
     }
 
-    public int weekdayCountAlgorythm() {
+    public String toString() {
 
-        int dayIndex = (ammountDays + monthIndex + yearIndex) % 7;
-
-        return weekdaySort();
+        return this.day + "-" + this.month + "-" + this.year + " was " + getWeekdayName();
     }
+    //endregion
+
 }
