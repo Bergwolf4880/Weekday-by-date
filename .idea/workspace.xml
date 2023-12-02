@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf437f1a-0e45-48fb-ac3b-9f2acc164272" name="Changes" comment="CalendarProject">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="cf437f1a-0e45-48fb-ac3b-9f2acc164272" name="Changes" comment="Calendar Project Upgrade">
       <change beforePath="$PROJECT_DIR$/src/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DateEncode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +69,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701466080800</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Calendar Project Upgrade">
+      <option name="closed" value="true" />
+      <created>1701476600031</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701476600031</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -88,7 +93,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CalendarProject" />
-    <option name="LAST_COMMIT_MESSAGE" value="CalendarProject" />
+    <MESSAGE value="Calendar Project Upgrade" />
+    <option name="LAST_COMMIT_MESSAGE" value="Calendar Project Upgrade" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -61,10 +61,11 @@ public class Date {
     public String getWeekdayName() {
         return weekdays[getWeekdayNumber()];
     }
-
     private int getWeekdayNumber() {
-        return (getCurrentMonthDays() + getMonthIndex() + getYearIndex() - (isLeapYear(this.year) ? 1 : 0)) % 7;
-    }
+            return (isLeapYear(this.year)) ?
+                    (getCurrentMonthDays() + getMonthIndex() + getYearIndex()-1) % 7:
+                    (getCurrentMonthDays() + getMonthIndex() + getYearIndex()) % 7;
+        }
 
     //endregion
 
