@@ -4,13 +4,14 @@ public class Date {
     private int year;
 
     private static final String[] weekdays =
-            {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+            {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 
     public Date(int year, int month, int day) {
 
         this.year = year;
         setMonth(month);
         setDay(day);
+
     }
 
     //region GetterSetter
@@ -19,7 +20,7 @@ public class Date {
     }
 
     public void setYear(int year) {
-        if (day > getCurrentMonthDays()) throw new RuntimeException("Invalid day");
+       //if (year <= 900 && year >= 2500 ) throw new RuntimeException("Invalid year");
         this.year = year;
     }
 
@@ -30,10 +31,6 @@ public class Date {
     public void setMonth(int month) {
         if (month > 12) throw new RuntimeException("Invalid month");
         this.month = month;
-    }
-
-    public int getDay() {
-        return day;
     }
 
     public void setDay(int day) {
@@ -61,11 +58,15 @@ public class Date {
     public String getWeekdayName() {
         return weekdays[getWeekdayNumber()];
     }
+
     private int getWeekdayNumber() {
-            return (isLeapYear(this.year)) ?
-                    (getCurrentMonthDays() + getMonthIndex() + getYearIndex()-1) % 7:
-                    (getCurrentMonthDays() + getMonthIndex() + getYearIndex()) % 7;
-        }
+
+        int m = getMonthIndex();
+        int y = getYearIndex();
+
+        return (this.day + m + y) % 7;
+
+    }
 
     //endregion
 
@@ -87,12 +88,23 @@ public class Date {
     }
 
     private boolean isLeapYear(int year) {
-        return (year % 4 == 0 && (year % 400 == 0 ^ year % 100 != 0));
+
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 
     }
 
     private int getYearIndex() {
-        return -2 * ((this.year / 100) % 4 + 3);
+
+        int y = (year/100);
+
+        y = switch (y) {
+            case 12, 16, 20, 24 -> 6;
+            case 9, 13, 17, 21 -> 4;
+            case 10, 14, 18, 22 -> 2;
+            case 11, 15, 19, 23 -> 0;
+            default -> y;
+        };
+        return (y + year % 100 + year % 100 / 4) % 7;
     }
 
     public String toString() {
